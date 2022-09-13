@@ -2,7 +2,7 @@ import React from 'react';
 import { createGlobalStyle } from 'styled-components';
 import reset from 'styled-reset';
 
-import { Text } from '@/component/base-component/text';
+import { Text } from '@/components/text';
 import { colors } from '@/styles/colors';
 
 const GlobalStyle = createGlobalStyle`
