@@ -1,19 +1,11 @@
-import React from 'react';
-import { createGlobalStyle } from 'styled-components';
-import reset from 'styled-reset';
-
-import { Text } from '@/components/text';
-import { colors } from '@/styles/colors';
-
-const GlobalStyle = createGlobalStyle`
-  ${reset}
-`;
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 const App = () => (
-  <>
-    <GlobalStyle />
-    <Text color={colors.error500}>test</Text>
-  </>
+  <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<div>home</div>} />
+    </Routes>
+  </BrowserRouter>
 );
 
 export default App;
