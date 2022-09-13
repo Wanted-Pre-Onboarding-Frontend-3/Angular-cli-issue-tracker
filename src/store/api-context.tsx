@@ -1,9 +1,7 @@
 import axios from 'axios';
-import { createContext, useCallback, useEffect, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 
-type Props = {
-  children: React.ReactNode;
-};
+import { Props } from '@/@types/issue';
 
 const IssueStateContext = createContext({} as any);
 
@@ -19,11 +17,11 @@ export const IssueProvider: React.FC<Props> = ({ children }) => {
         },
       });
       setIssueData(response.data);
-      console.log(issueData);
     } catch (err) {
       console.log(err);
     }
   };
+  console.log(issueData);
 
   useEffect(() => {
     getIssueData();
@@ -32,3 +30,5 @@ export const IssueProvider: React.FC<Props> = ({ children }) => {
 
   return <IssueStateContext.Provider value={issueData}>{children}</IssueStateContext.Provider>;
 };
+
+export default IssueStateContext;
