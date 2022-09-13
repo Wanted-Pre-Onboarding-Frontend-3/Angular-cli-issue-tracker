@@ -2,7 +2,6 @@ import React from 'react';
 
 // eslint-disable-next-line import/extensions
 import { FontSizeKey, FontWeightKey, TextDecorationKey } from '@/styles/typography';
-import { toStyledProps } from '@/utils/styled.util';
 
 import { RootWrap } from './styles';
 
@@ -25,10 +24,9 @@ interface Props extends TextProps {
 // base component
 export const Text: React.FC<Props> = (props) => {
   const { className, children, element, ...rest } = props;
-  const styledProps = toStyledProps(rest);
 
   return (
-    <RootWrap className={className} as={element} {...styledProps}>
+    <RootWrap className={className} as={element} {...rest}>
       {children}
     </RootWrap>
   );
