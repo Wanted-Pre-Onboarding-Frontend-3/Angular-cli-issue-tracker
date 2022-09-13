@@ -11,6 +11,12 @@ export interface IIssue {
   body: string; // 본문
 }
 
+export type IssueContextType = {
+  issueData: IIssue[];
+  error: boolean;
+  isLoading: boolean;
+};
+
 export type Props = {
   children: React.ReactNode;
 };

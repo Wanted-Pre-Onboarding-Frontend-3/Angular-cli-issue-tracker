@@ -1,14 +1,17 @@
 import axios from 'axios';
 import { createContext, useEffect, useState } from 'react';
 
-import { Props } from '@/@types/issue';
+import { IssueContextType, Props } from '@/@types/issue';
 
-const IssueStateContext = createContext({} as any);
+const IssueStateContext = createContext({} as IssueContextType);
 
 export const IssueProvider: React.FC<Props> = ({ children }) => {
   const [issueData, setIssueData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(false);
 
   const getIssueData = async () => {
+    setIsLoading(true);
     try {
       const response = await axios.get(`${process.env.REACT_APP_API_HOST}`, {
         headers: {
@@ -18,8 +21,10 @@ export const IssueProvider: React.FC<Props> = ({ children }) => {
       });
       setIssueData(response.data);
     } catch (err) {
+      setError(true);
       console.log(err);
     }
+    setIsLoading(false);
   };
   console.log(issueData);
 
@@ -28,7 +33,8 @@ export const IssueProvider: React.FC<Props> = ({ children }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return <IssueStateContext.Provider value={issueData}>{children}</IssueStateContext.Provider>;
+  // eslint-disable-next-line react/jsx-no-constructed-context-values
+  return <IssueStateContext.Provider value={{ issueData, error, isLoading }}>{children}</IssueStateContext.Provider>;
 };
 
 export default IssueStateContext;
