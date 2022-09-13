@@ -1,16 +1,8 @@
-import { useEffect } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-import { IssueProvider, useApiDispatch } from '@/store/provider';
-import { getIssueData } from '@/store/reducer';
+import { IssueProvider } from '@/store/api-context';
 
 const App = () => {
-  const dispatch = useApiDispatch();
-
-  useEffect(() => {
-    getIssueData(dispatch);
-  }, [dispatch]);
-
   return (
     <IssueProvider>
       <BrowserRouter>
