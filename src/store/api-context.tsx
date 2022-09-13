@@ -10,7 +10,7 @@ const IssueStateContext = createContext({} as any);
 export const IssueProvider: React.FC<Props> = ({ children }) => {
   const [issueData, setIssueData] = useState([]);
 
-  const getIssueData = useCallback(async () => {
+  const getIssueData = async () => {
     try {
       const response = await axios.get(`${process.env.REACT_APP_API_HOST}`, {
         headers: {
@@ -23,10 +23,11 @@ export const IssueProvider: React.FC<Props> = ({ children }) => {
     } catch (err) {
       console.log(err);
     }
-  }, [issueData]);
+  };
 
   useEffect(() => {
     getIssueData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return <IssueStateContext.Provider value={issueData}>{children}</IssueStateContext.Provider>;
