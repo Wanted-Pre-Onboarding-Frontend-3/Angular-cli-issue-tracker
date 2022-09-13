@@ -1,6 +1,11 @@
-import { Text } from '@/components/text';
-import { colors } from '@/styles/colors';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-const App = () => <Text color={colors.error500}>test</Text>;
+const App = () => (
+  <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<div>home</div>} />
+    </Routes>
+  </BrowserRouter>
+);
 
 export default App;
