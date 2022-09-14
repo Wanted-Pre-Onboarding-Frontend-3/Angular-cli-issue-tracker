@@ -1,16 +1,19 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import Home from '@/pages/home/Home';
+import { IssueProvider } from '@/store/api-context';
 
-import Detail from './pages/detail/Detail';
-
-const App = () => (
-  <BrowserRouter>
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/issue/:issueNumber" element={<Detail />} />
-    </Routes>
-  </BrowserRouter>
-);
+const App = () => {
+  return (
+    <IssueProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/issue/:issueNumber" element={<Detail />} />
+        </Routes>
+      </BrowserRouter>
+    </IssueProvider>
+  );
+};
 
 export default App;
