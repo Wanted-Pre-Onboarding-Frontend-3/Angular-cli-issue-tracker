@@ -75,6 +75,7 @@ export type IssueContextType = {
   setIssueData: React.Dispatch<React.SetStateAction<IIssue[] | []>>;
   error: boolean;
   isLoading: boolean;
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export type Props = {

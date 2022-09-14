@@ -1,5 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import axios, { AxiosRequestConfig } from 'axios';
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useEffect, useMemo, useState } from 'react';
 
 import { IIssue, IssueContextType, Props } from '@/types';
 
@@ -24,7 +25,15 @@ export const IssueProvider: React.FC<Props> = ({ children }) => {
   });
 
   const getIssueApi = (config?: AxiosRequestConfig): Promise<any> =>
-    axiosInstance.get(`${BASE_URL}`, { params: { sort: 'comments' } }).then((response) => response.data);
+    axiosInstance
+      .get(`${BASE_URL}`, {
+        ...config,
+        params: {
+          sort: 'comments',
+          ...config?.params,
+        },
+      })
+      .then((response) => response.data);
 
   useEffect(() => {
     (async () => {
@@ -38,15 +47,13 @@ export const IssueProvider: React.FC<Props> = ({ children }) => {
       }
       setIsLoading(false);
     })();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return (
-    // eslint-disable-next-line react/jsx-no-constructed-context-values
-    <IssueStateContext.Provider value={{ getIssueApi, issueData, setIssueData, error, isLoading }}>
-      {children}
-    </IssueStateContext.Provider>
+  const value = useMemo(
+    () => ({ getIssueApi, issueData, setIssueData, error, isLoading, setIsLoading }),
+    [issueData, error, isLoading]
   );
+  return <IssueStateContext.Provider value={value}>{children}</IssueStateContext.Provider>;
 };
 
 export default IssueStateContext;
