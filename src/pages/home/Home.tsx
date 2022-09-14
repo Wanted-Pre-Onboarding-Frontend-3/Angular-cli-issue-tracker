@@ -1,13 +1,13 @@
 import { useContext, useState } from 'react';
 import styled from 'styled-components';
 
+import Layout from '@/components/Layout';
 import Spinner from '@/components/Spinner';
 import useIntersect from '@/hooks/useIntersect';
 import AdBanner from '@/pages/home/components/AdBanner';
 import MainList from '@/pages/home/components/MainList';
 import IssueStateContext from '@/store/api-context';
 import { getNextPage } from '@/utils/GetNextPage';
-import Layout from '@/components/Layout';
 
 const Home = () => {
   const [isLastPage, setIsLastPage] = useState<boolean>(false);
@@ -46,7 +46,8 @@ const Home = () => {
 
             return <MainList {...itemProps} />;
           })}
-        <Target ref={ref} />
+        <SpinnerWrapper>{isLoading && <Spinner />}</SpinnerWrapper>
+        {!isLoading && <Target ref={ref} />}
       </RootWrap>
     </Layout>
   );

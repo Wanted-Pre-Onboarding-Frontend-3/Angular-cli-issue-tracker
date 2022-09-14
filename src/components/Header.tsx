@@ -1,10 +1,10 @@
+import { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
+import IssueStateContext from '@/store/api-context';
 import { colors } from '@/styles/colors';
 import { fontSize, fontWeight } from '@/styles/typography';
-import { Link } from 'react-router-dom';
-import { useContext } from 'react';
-import IssueStateContext from '@/store/api-context';
 
 const Header = () => {
   const issueCtx = useContext(IssueStateContext);
