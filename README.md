@@ -12,7 +12,7 @@
 
 # 배포 링크
 
-- [링크](http://tmdb-team-3.s3-website.ap-northeast-2.amazonaws.com/)
+- [링크](http://angular-cli-issue-tracker.s3-website.ap-northeast-2.amazonaws.com )
 
 <br><br>
 
@@ -29,11 +29,11 @@
 - [라우팅](#라우팅)
 - [과제 요건 및 구현 내용](#과제-요건-및-구현-내용)
   - [과제 요건](#과제-요건)
-  - [0. 공통기능](#0-공통기능)
+  - [0. 공통기능 (로딩표시, 인피니티 스크롤)](#0-공통기능-로딩표시-인피니티-스크롤)
   - [1. 메인페이지 (/)](#1-메인페이지-)
   - [2. 상세페이지 (/issue/:issueNumber)](#2-상세페이지-issueissuenumber)
-  - [3.](#3)
-  - [4.](#4)
+  - [3. Context API를 활용한 API 연동](#3-context-api를-활용한-api-연동)
+  - [4. UI 및 에러 화면](#4-ui-및-에러-화면)
 - [컨벤션 링크](#컨벤션-링크)
 
 <br><br>
@@ -42,9 +42,9 @@
 
 | 이름   | 역할       |
 | ------ | ---------- |
-| 김리후 |            |
+| 김리후 | Context API, 배포 |
 | 이경준 |            |
-| 이혜성 | **팀장** / |
+| 이혜성 | **팀장** / 초기 셋팅, |
 | 문선화 |            |
 | 홍성준 |            |
 
@@ -77,14 +77,12 @@
 
 2. set environment variables
 
-   1. token 설정 내용
+   1. package.json과 같은 디렉토리에 .env.local 파일을 생성합니다.
 
-   2. package.json과 같은 디렉토리에 .env.local 파일을 생성합니다.
-
-   3. .env.local 파일 안에 아래와 같이 작성합니다.
+   2. .env.local 파일 안에 아래와 같이 작성합니다.
 
 ```
- REACT_APP_API_HOST = 'https://api.github.com/angular/angular-cli.git/issues'
+ REACT_APP_API_HOST=https://api.github.com/repos/angular/angular-cli/issues
 ```
 <br>
 
@@ -122,6 +120,8 @@
 
 ## 과제 요건
 
+
+```
 - 필수 사항
 
   - 이슈 목록 및 상세 화면 기능 구현
@@ -130,22 +130,21 @@
   - 데이터 요청 중 로딩 표시
   - UI는 데스크톱, 모바일에서 보았을 때 모두 읽기 편하게 구현
 
-<br>
 
 - 선택 사항
 
   - 에러 화면 구현
   - CSS-in-JS 구현
+```
 
-<br><br>
+<br>
 
 1. 이슈 목록 화면
 
    - 이슈 목록 가져오기 API 활용
    - open 상태의 이슈 중 코멘트가 많은 순으로 정렬
    - 각 행에는 ‘이슈번호, 이슈제목, 작성자, 작성일, 코멘트수’를 표시
-   - 다섯번째 셀에는 광고 이미지 출력
-     - 광고 이미지 클릭 시 [https://thingsflow.com/ko/home](https://thingsflow.com/ko/home)로 이동
+   - 다섯번째 셀에는 광고 이미지 출력, 광고 이미지 클릭 시 [https://thingsflow.com/ko/home](https://thingsflow.com/ko/home)로 이동
    - 화면을 아래로 스크롤 할 시 이슈 목록 추가 로딩(인피니티 스크롤)
 
 <br>
@@ -164,50 +163,66 @@
 
 <br><br>
 
-## 0. 공통기능
+## 0. 공통기능 (로딩표시, 인피니티 스크롤)
 
-- 구현한 점
+- 구현한 내용
+
 <br>
 
-- 개선해야 할 점
+- 고민했던 내용
 
 <br>
 
 ## 1. 메인페이지 (/)
 
-- 구현한 점
+- 구현한 내용
 
 <br>
 
-- 개선해야 할 점
+- 고민했던 내용
 
 <br>
 
 ## 2. 상세페이지 (/issue/:issueNumber)
 
-- 구현한 점
-
-- 개선해야 할 점
+- 구현한 내용
 
 <br>
 
-## 3.
-
-- 구현한 점
+- 고민했던 내용
 
 <br>
 
-- 개선해야 할 점
+## 3. Context API를 활용한 API 연동
+
+- 구현한 내용
+  - Context API를 활용하여 공통으로 사용하게 될 api 로직 및 기본 state 값 구현
+  - 공통 type 지정
+  
+<br>
+
+- 고민했던 내용
+  - 다른 컴포넌트에서 사용하게 될 공통 로직이 어떤 것일까 고민.
+  - axios instance를 별도의 api 폴더에 구현하려 하였으나, 한 곳에 관심사를 모으기 위해 context api 내부로 이동.
+  - 활용하기 쉽게 api 요청을 아래와 같이 객체로 묶었으나, 결과적으로 `getIssueDetailApi`는 사용되지 않을 것이라 판단하여 삭제.
+
+    ```ts
+      const api = {
+        getIssueApi: (config?: AxiosRequestConfig) =>
+          axiosInstance.get(`${BASE_URL}`, config).then((response) => response.data),
+        getIssueDetailApi: (issueNumber: number) =>
+          axiosInstance.get(`${BASE_URL}/${issueNumber}`).then((response) => response.data),
+      };
+    ```
+<br>
+
+## 4. UI 및 에러 화면
+
+- 구현한 내용
 
 <br>
 
-## 4.
-
-- 구현한 점
-
-<br>
-
-- 개선해야 할 점
+- 고민했던 내용
 
 
 <br><br>
