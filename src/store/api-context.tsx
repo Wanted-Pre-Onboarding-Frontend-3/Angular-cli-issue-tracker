@@ -21,7 +21,6 @@ export const IssueProvider: React.FC<Props> = ({ children }) => {
     paramsSerializer: (params) => {
       return new URLSearchParams(params).toString();
     },
-    timeout: 1000,
   });
 
   const api = {

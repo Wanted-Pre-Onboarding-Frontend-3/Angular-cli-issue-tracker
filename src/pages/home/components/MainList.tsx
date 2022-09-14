@@ -2,14 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { GetManyPointsIssueResource } from '@/api';
 import { Text } from '@/components/text';
 import { colors } from '@/styles/colors';
+import { IIssue } from '@/types';
 import { formatDate } from '@/utils/FormatDate';
 
-type Props = GetManyPointsIssueResource;
-
-const MainList: React.FC<Props> = (props) => {
+const MainList: React.FC<IIssue> = (props) => {
   const { number, title, user, created_at: createdAt, comments } = props;
 
   return (

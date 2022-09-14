@@ -1,26 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 
-import { Api, GetManyPointsIssueResource } from '@/api';
 import AdBanner from '@/pages/home/components/AdBanner';
 import MainList from '@/pages/home/components/MainList';
+import IssueStateContext from '@/store/api-context';
 
 const Home = () => {
-  const [issues, setIssues] = useState<GetManyPointsIssueResource[]>([]);
-
-  useEffect(() => {
-    const getIssue = async () => {
-      const { data } = await Api.getManyIssue.request();
-      setIssues(data);
-    };
-
-    getIssue();
-  }, []);
-
+  const { issueData } = useContext(IssueStateContext);
   return (
     <RootWrap>
-      {issues &&
-        issues.map((itemProps, index) => {
+      {issueData &&
+        issueData.map((itemProps, index) => {
           //* 5번째 광고 추가
           if (index === 4) {
             return (
