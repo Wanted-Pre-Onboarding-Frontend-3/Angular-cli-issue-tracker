@@ -4,13 +4,13 @@ import { useParams } from 'react-router';
 import remarkGfm from 'remark-gfm';
 import styled from 'styled-components';
 
+import Layout from '@/components/Layout';
 import Spinner from '@/components/Spinner';
 import { Text } from '@/components/text';
 import IssueStateContext from '@/store/api-context';
+import { colors } from '@/styles/colors';
 
 import { Flex, Span } from './components/common';
-import Layout from '@/components/Layout';
-import { colors } from '@/styles/colors';
 
 const Detail = () => {
   const { isLoading, issueData } = useContext(IssueStateContext);
@@ -62,12 +62,13 @@ const Section = styled.section`
   padding: 2rem;
   border: 1px solid ${colors.grey200};
 
-  @media and screen (max-width: 768px) {
+  @media screen and (max-width: 768px) {
     width: 100%;
-    max-width: 768px
+    max-width: 768px;
     padding: 0;
   }
 `;
+
 const IssueInfo = styled(Flex)`
   background-color: ${colors.grey200};
   border-radius: 20px 20px 0 0;

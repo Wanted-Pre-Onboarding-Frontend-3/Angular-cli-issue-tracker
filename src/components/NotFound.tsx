@@ -49,7 +49,7 @@ const Container = styled.section`
     margin: 0 auto;
   }
 
-  @media and screen (max-width: 768px) {
+  @media screen and (max-width: 768px) {
     img {
       width: 300px;
     }
