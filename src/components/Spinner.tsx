@@ -26,8 +26,8 @@ const StyledSpinner = styled.div`
     height: 30px;
     margin: 1px;
     border-radius: 50%;
-    border: 5px solid ${colors.white};
-    border-color: ${colors.white} transparent ${colors.white} transparent;
+    border: 5px solid ${colors.black};
+    border-color: ${colors.black} transparent ${colors.black} transparent;
     animation: ${spin} 1.2s linear infinite;
   }
 `;

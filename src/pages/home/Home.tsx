@@ -1,6 +1,7 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import styled from 'styled-components';
 
+import Spinner from '@/components/Spinner';
 import useIntersect from '@/hooks/useIntersect';
 import AdBanner from '@/pages/home/components/AdBanner';
 import MainList from '@/pages/home/components/MainList';
@@ -8,15 +9,23 @@ import IssueStateContext from '@/store/api-context';
 import { getNextPage } from '@/utils/GetNextPage';
 
 const Home = () => {
-  const { getIssueApi, issueData, setIssueData } = useContext(IssueStateContext);
+  const [isLastPage, setIsLastPage] = useState<boolean>(false);
+  const { getIssueApi, issueData, setIssueData, isLoading, setIsLoading } = useContext(IssueStateContext);
   const ref = useIntersect(async (entry, observer) => {
     observer.unobserve(entry.target);
-    const nextData = await getIssueApi({
-      params: {
-        page: getNextPage(),
-      },
-    });
-    setIssueData((curr) => curr.concat(...nextData));
+    if (!isLastPage) {
+      setIsLoading(true);
+      const nextData = await getIssueApi({
+        params: {
+          page: getNextPage(),
+        },
+      });
+      if (nextData.length === 0) {
+        setIsLastPage(true);
+      }
+      setIssueData((curr) => curr.concat(...nextData));
+      setIsLoading(false);
+    }
   });
 
   return (
@@ -35,6 +44,7 @@ const Home = () => {
 
           return <MainList {...itemProps} />;
         })}
+      <SpinnerWrapper>{isLoading && <Spinner />}</SpinnerWrapper>
       <Target ref={ref} />
     </RootWrap>
   );
@@ -48,6 +58,12 @@ const RootWrap = styled.div`
   display: flex;
   flex-direction: column;
   gap: 16px;
+`;
+
+const SpinnerWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const Target = styled.div`
