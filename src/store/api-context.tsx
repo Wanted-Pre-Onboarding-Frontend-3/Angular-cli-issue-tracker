@@ -24,6 +24,7 @@ export const IssueProvider: React.FC<Props> = ({ children }) => {
     },
   });
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const getIssueApi = (config?: AxiosRequestConfig): Promise<any> =>
     axiosInstance
       .get(`${BASE_URL}`, {
