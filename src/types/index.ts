@@ -68,7 +68,6 @@ export interface IIssue {
 }
 
 export type IssueContextType = {
-  api: object;
   issueData: IIssue[];
   error: boolean;
   isLoading: boolean;

@@ -24,18 +24,14 @@ export const IssueProvider: React.FC<Props> = ({ children }) => {
     timeout: 1000,
   });
 
-  const api = {
-    getIssueApi: (config?: AxiosRequestConfig) =>
-      axiosInstance.get(`${BASE_URL}`, config).then((response) => response.data),
-    getIssueDetailApi: (issueNumber: number) =>
-      axiosInstance.get(`${BASE_URL}/${issueNumber}`).then((response) => response.data),
-  };
+  const getIssueApi = (config?: AxiosRequestConfig) =>
+    axiosInstance.get(`${BASE_URL}`, config).then((response) => response.data);
 
   useEffect(() => {
     (async () => {
       setIsLoading(true);
       try {
-        const response = await api.getIssueApi();
+        const response = await getIssueApi();
         setIssueData(response);
       } catch (err) {
         setError(true);
@@ -48,7 +44,7 @@ export const IssueProvider: React.FC<Props> = ({ children }) => {
 
   return (
     // eslint-disable-next-line react/jsx-no-constructed-context-values
-    <IssueStateContext.Provider value={{ api, issueData, error, isLoading }}>{children}</IssueStateContext.Provider>
+    <IssueStateContext.Provider value={{ issueData, error, isLoading }}>{children}</IssueStateContext.Provider>
   );
 };
 
