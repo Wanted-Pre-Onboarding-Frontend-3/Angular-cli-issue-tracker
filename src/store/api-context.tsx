@@ -1,14 +1,14 @@
-import axios, { AxiosRequestConfig } from 'axios';
+import axios from 'axios';
 import { createContext, useEffect, useState } from 'react';
 
-import { IssueContextType, Props } from '@/types';
+import { ApiType, IIssue, IssueContextType, Props } from '@/types';
 
 const IssueStateContext = createContext({} as IssueContextType);
 
 export const IssueProvider: React.FC<Props> = ({ children }) => {
-  const [issueData, setIssueData] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(false);
+  const [issueData, setIssueData] = useState<IIssue[] | []>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState<boolean>(false);
 
   const BASE_URL = process.env.REACT_APP_API_HOST;
 
@@ -23,10 +23,9 @@ export const IssueProvider: React.FC<Props> = ({ children }) => {
     },
   });
 
-  const api = {
-    getIssueApi: (config?: AxiosRequestConfig) =>
-      axiosInstance.get(`${BASE_URL}`, config).then((response) => response.data),
-    getIssueDetailApi: (issueNumber: number) =>
+  const api: ApiType = {
+    getIssueApi: (config?) => axiosInstance.get(`${BASE_URL}`, config).then((response) => response.data),
+    getIssueDetailApi: (issueNumber) =>
       axiosInstance.get(`${BASE_URL}/${issueNumber}`).then((response) => response.data),
   };
 
@@ -47,7 +46,9 @@ export const IssueProvider: React.FC<Props> = ({ children }) => {
 
   return (
     // eslint-disable-next-line react/jsx-no-constructed-context-values
-    <IssueStateContext.Provider value={{ api, issueData, error, isLoading }}>{children}</IssueStateContext.Provider>
+    <IssueStateContext.Provider value={{ api, issueData, setIssueData, error, isLoading }}>
+      {children}
+    </IssueStateContext.Provider>
   );
 };
 

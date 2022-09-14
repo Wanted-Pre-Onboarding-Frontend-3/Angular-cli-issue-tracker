@@ -1,3 +1,5 @@
+import { AxiosRequestConfig } from 'axios';
+
 export interface IIssue {
   url: string;
   repository_url: string;
@@ -68,10 +70,16 @@ export interface IIssue {
 }
 
 export type IssueContextType = {
-  api: object;
+  api: ApiType;
   issueData: IIssue[];
+  setIssueData: React.Dispatch<React.SetStateAction<IIssue[] | []>>;
   error: boolean;
   isLoading: boolean;
+};
+
+export type ApiType = {
+  getIssueApi: (config?: AxiosRequestConfig) => Promise<any>;
+  getIssueDetailApi: (issueNumber: number) => Promise<any>;
 };
 
 export type Props = {
