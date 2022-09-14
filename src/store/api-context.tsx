@@ -24,13 +24,15 @@ export const IssueProvider: React.FC<Props> = ({ children }) => {
   });
 
   const getIssueApi = (config?: AxiosRequestConfig): Promise<any> =>
-    axiosInstance.get(`${BASE_URL}`, { params: { sort: 'comments' } }).then((response) => response.data);
+    axiosInstance.get(`${BASE_URL}`, config).then((response) => response.data);
 
   useEffect(() => {
+    const config = { params: { sort: 'comments' } };
+
     (async () => {
       setIsLoading(true);
       try {
-        const response = await getIssueApi();
+        const response = await getIssueApi(config);
         setIssueData(response);
       } catch (err) {
         setError(true);
