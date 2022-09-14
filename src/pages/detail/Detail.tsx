@@ -9,6 +9,8 @@ import { Text } from '@/components/text';
 import IssueStateContext from '@/store/api-context';
 
 import { Flex, Span } from './components/common';
+import Layout from '@/components/Layout';
+import { colors } from '@/styles/colors';
 
 const Detail = () => {
   const { isLoading, issueData } = useContext(IssueStateContext);
@@ -18,29 +20,36 @@ const Detail = () => {
   return isLoading ? (
     <Spinner />
   ) : (
-    <Section>
-      <IssueInfo flexDirection="row" padding={[24, 24, 24, 24]} alignItems="center" gap={24}>
-        <UserProfile src={issueDetail?.user?.avatar_url} alt="user profile" />
-        <Flex flexDirection="column" gap={8}>
-          <Text element="h1" fontSize="XL3" fontWeight="bold">
-            <Span fontSize={24} mr={12} color="gray">
-              #{issueDetail?.number}
-            </Span>
-            {issueDetail?.title}
-          </Text>
-          <Flex flexDirection="row" gap={4}>
-            <Text element="span">작성자</Text>
-            <Text element="span">{issueDetail?.user?.login}</Text>
-            <Text element="span">작성일</Text>
-            <Text element="span">{new Date(issueDetail?.created_at || '')?.toLocaleString()}</Text>
+    <Layout>
+      <Section>
+        <IssueInfo flexDirection="row" padding={[24, 24, 24, 24]} alignItems="center" gap={24}>
+          <UserProfile src={issueDetail?.user?.avatar_url} alt="user profile" />
+          <Flex flexDirection="column" gap={8}>
+            <Text element="h1" fontSize="XL3" fontWeight="bold">
+              <Span fontSize={24} mr={12} color="gray">
+                #{issueDetail?.number}
+              </Span>
+              {issueDetail?.title}
+            </Text>
+            <Flex flexDirection="row" gap={4}>
+              <Text element="span">작성자</Text>
+              <Text element="span">{issueDetail?.user?.login}</Text>
+              <Text element="span">작성일</Text>
+              <Text element="span">{new Date(issueDetail?.created_at || '')?.toLocaleString()}</Text>
+            </Flex>
           </Flex>
-        </Flex>
-        <Text element="span">코멘트 {issueDetail?.comments}</Text>
-      </IssueInfo>
-      <Article>
-        <ReactMarkdown remarkPlugins={[remarkGfm]}>{issueDetail?.body || ''}</ReactMarkdown>
-      </Article>
-    </Section>
+          <Comments>
+            <Text element="span">코멘트</Text>
+            <Text element="span" fontSize="XL1" fontWeight="bold" color={`${colors.grey700}`}>
+              {issueDetail?.comments}
+            </Text>
+          </Comments>
+        </IssueInfo>
+        <Article>
+          <ReactMarkdown remarkPlugins={[remarkGfm]}>{issueDetail?.body || ''}</ReactMarkdown>
+        </Article>
+      </Section>
+    </Layout>
   );
 };
 
@@ -50,20 +59,41 @@ const Section = styled.section`
   width: 100%;
   max-width: 1280px;
   margin: 0 auto;
+  padding: 2rem;
+  border: 1px solid ${colors.grey200};
+
+  @media and screen (max-width: 768px) {
+    width: 100%;
+    max-width: 768px
+    padding: 0;
+  }
 `;
 const IssueInfo = styled(Flex)`
+  background-color: ${colors.grey200};
+  border-radius: 20px 20px 0 0;
+
+  flex-basis: 200px;
   @media (max-width: 768px) {
     flex-direction: column;
   }
 `;
 export const UserProfile = styled.img`
   border-radius: 50%;
+  border: 1px solid ${colors.grey400};
   width: 64px;
   height: 64px;
   object-fit: cover;
 `;
 
+export const Comments = styled.div`
+  text-align: center;
+`;
+
 export const Article = styled.article`
+  padding: 1rem 2rem;
   white-space: pre-line;
+  border-radius: 0 0 20px 20px;
+  border: 1px solid ${colors.grey200};
   padding: 24px;
+  word-break: break-all;
 `;
