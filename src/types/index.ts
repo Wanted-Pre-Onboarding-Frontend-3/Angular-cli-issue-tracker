@@ -70,7 +70,7 @@ export interface IIssue {
 }
 
 export type IssueContextType = {
-  getIssueApi: (config?: AxiosRequestConfig) => Promise<any>;;
+  getIssueApi: (config?: AxiosRequestConfig) => Promise<any>;
   issueData: IIssue[];
   setIssueData: React.Dispatch<React.SetStateAction<IIssue[] | []>>;
   error: boolean;
