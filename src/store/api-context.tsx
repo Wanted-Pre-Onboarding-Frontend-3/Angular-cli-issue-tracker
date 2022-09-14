@@ -24,7 +24,15 @@ export const IssueProvider: React.FC<Props> = ({ children }) => {
   });
 
   const getIssueApi = (config?: AxiosRequestConfig): Promise<any> =>
-    axiosInstance.get(`${BASE_URL}`, { params: { sort: 'comments' } }).then((response) => response.data);
+    axiosInstance
+      .get(`${BASE_URL}`, {
+        ...config,
+        params: {
+          sort: 'comments',
+          ...config?.params,
+        },
+      })
+      .then((response) => response.data);
 
   useEffect(() => {
     (async () => {
