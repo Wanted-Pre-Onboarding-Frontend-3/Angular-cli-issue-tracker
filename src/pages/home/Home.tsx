@@ -6,6 +6,7 @@ import AdBanner from '@/pages/home/components/AdBanner';
 import MainList from '@/pages/home/components/MainList';
 import IssueStateContext from '@/store/api-context';
 import { getNextPage } from '@/utils/GetNextPage';
+import Layout from '@/components/Layout';
 
 const Home = () => {
   const { getIssueApi, issueData, setIssueData } = useContext(IssueStateContext);
@@ -20,39 +21,45 @@ const Home = () => {
   });
 
   return (
-    <RootWrap>
-      {issueData &&
-        issueData.map((itemProps, index) => {
-          //* 5번째 광고 추가
-          if (index === 4) {
-            return (
-              <>
-                <AdBanner />
-                <MainList {...itemProps} />
-              </>
-            );
-          }
+    <Layout>
+      <RootWrap>
+        {issueData &&
+          issueData.map((itemProps, index) => {
+            //* 5번째 광고 추가
+            if (index === 4) {
+              return (
+                <>
+                  <AdBanner />
+                  <MainList {...itemProps} />
+                </>
+              );
+            }
 
-          return <MainList {...itemProps} />;
-        })}
-      <Target ref={ref} />
-    </RootWrap>
+            return <MainList {...itemProps} />;
+          })}
+        <Target ref={ref} />
+      </RootWrap>
+    </Layout>
   );
 };
 
-const RootWrap = styled.div`
-  max-width: 500px;
-  min-width: 500px;
-  margin: 0 auto;
+export default Home;
 
+const RootWrap = styled.div`
+  width: 90%;
+  max-width: 1280px;
+  margin: 1rem auto;
   display: flex;
   flex-direction: column;
   gap: 16px;
+
+  @media and screen (max-width: 768px) {
+    width: 100%;
+    max-width: 768px;
+  }
 `;
 
 const Target = styled.div`
   height: 1px;
   z-index: -1;
 `;
-
-export default Home;
