@@ -1,7 +1,8 @@
-import { colors } from '@/styles/colors';
-import { fontSize, fontWeight } from '@/styles/typography';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+
+import { colors } from '@/styles/colors';
+import { fontSize, fontWeight } from '@/styles/typography';
 
 const NotFound = () => {
   return (
@@ -11,7 +12,7 @@ const NotFound = () => {
       <Link to="/">
         <h3>이슈 리스트로 돌아가기</h3>
       </Link>
-      <a href="https://thingsflow.com/ko/home" target="_blank">
+      <a href="https://thingsflow.com/ko/home" target="_blank" rel="noreferrer">
         <img src={`${process.env.PUBLIC_URL}/thingsflow_banner.png`} alt="Ad banner" />
       </a>
     </Container>
