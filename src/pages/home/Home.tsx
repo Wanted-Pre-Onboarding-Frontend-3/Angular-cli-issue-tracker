@@ -1,12 +1,24 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import styled from 'styled-components';
 
+import useIntersect from '@/hooks/useIntersect';
 import AdBanner from '@/pages/home/components/AdBanner';
 import MainList from '@/pages/home/components/MainList';
 import IssueStateContext from '@/store/api-context';
+import { getNextPage } from '@/utils/GetNextPage';
 
 const Home = () => {
-  const { issueData } = useContext(IssueStateContext);
+  const { api, issueData, setIssueData } = useContext(IssueStateContext);
+  const ref = useIntersect(async (entry, observer) => {
+    observer.unobserve(entry.target);
+    const nextData = await api.getIssueApi({
+      params: {
+        page: getNextPage(),
+      },
+    });
+    setIssueData((curr) => curr.concat(...nextData));
+  });
+
   return (
     <RootWrap>
       {issueData &&
@@ -23,6 +35,7 @@ const Home = () => {
 
           return <MainList {...itemProps} />;
         })}
+      <Target ref={ref} />
     </RootWrap>
   );
 };
@@ -35,6 +48,11 @@ const RootWrap = styled.div`
   display: flex;
   flex-direction: column;
   gap: 16px;
+`;
+
+const Target = styled.div`
+  height: 1px;
+  z-index: -1;
 `;
 
 export default Home;
