@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
+import Home from '@/pages/home/Home';
 import { IssueProvider } from '@/store/api-context';
 
 const App = () => {
@@ -7,7 +8,8 @@ const App = () => {
     <IssueProvider>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<div>home</div>} />
+          <Route path="/" element={<Home />} />
+          <Route path="/issue/:issueNumber" element={<Detail />} />
         </Routes>
       </BrowserRouter>
     </IssueProvider>
