@@ -41,7 +41,7 @@ module.exports = {
     // TypeScript
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/naming-convention': [
-      'error',
+      'warn',
       {
         selector: 'variable',
         format: ['camelCase', 'UPPER_CASE', 'PascalCase'],
