@@ -101,7 +101,50 @@
 <summary>프로젝트 구조</summary>
 
 ```
-
+📦src
+ ┣ 📂components
+ ┃ ┣ 📂text
+ ┃ ┃ ┣ 📜index.tsx
+ ┃ ┃ ┗ 📜styles.ts
+ ┃ ┣ 📜Header.tsx
+ ┃ ┣ 📜Layout.tsx
+ ┃ ┣ 📜NotFound.tsx
+ ┃ ┗ 📜Spinner.tsx
+ ┣ 📂hooks
+ ┃ ┗ 📜useIntersect.ts
+ ┣ 📂pages
+ ┃ ┣ 📂detail
+ ┃ ┃ ┣ 📂components
+ ┃ ┃ ┃ ┗ 📜common.ts
+ ┃ ┃ ┗ 📜Detail.tsx
+ ┃ ┗ 📂home
+ ┃ ┃ ┣ 📂components
+ ┃ ┃ ┃ ┣ 📜AdBanner.tsx
+ ┃ ┃ ┃ ┗ 📜MainList.tsx
+ ┃ ┃ ┗ 📜Home.tsx
+ ┣ 📂store
+ ┃ ┗ 📜api-context.tsx
+ ┣ 📂styles
+ ┃ ┣ 📂colors
+ ┃ ┃ ┗ 📜index.ts
+ ┃ ┣ 📂font
+ ┃ ┃ ┗ 📜index.ts
+ ┃ ┣ 📂typography
+ ┃ ┃ ┣ 📜font-size.ts
+ ┃ ┃ ┣ 📜font-weight.ts
+ ┃ ┃ ┣ 📜get-line-clamp-css.ts
+ ┃ ┃ ┣ 📜index.ts
+ ┃ ┃ ┗ 📜text-decoration-css.ts
+ ┃ ┗ 📜index.ts
+ ┣ 📂types
+ ┃ ┗ 📜index.ts
+ ┣ 📂utils
+ ┃ ┣ 📜FormatDate.ts
+ ┃ ┗ 📜GetNextPage.ts
+ ┣ 📜App.tsx
+ ┣ 📜index.css
+ ┣ 📜index.tsx
+ ┗ 📜react-app-env.d.ts
 ```
 
 </details>
@@ -180,7 +223,11 @@
 <br>
 
 - 고민했던 내용
-  - 인피니트 스크롤때 다음 두 페이지를 fetching하는 문제가 있으나 해결하지 못함.
+  - 인피니트 스크롤때 다음 두 페이지를 fetching하는 버그가 있었음.
+```js
+{!isLoading && <Target ref={ref} />}
+```
+위처럼 Target을 loading중이 아닐때만 렌더링하여 해결 (@성준님 솔루션)
 
 <br>
 
