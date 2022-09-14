@@ -46,7 +46,7 @@
 | 이경준 | 이슈 상세 페이지                         |
 | 이혜성 | **팀장** / 초기 셋팅, 로딩표시, 인피니트 |
 | 문선화 | UI 및 에러화면                           |
-| 홍성준 |                                          |
+| 홍성준 | 메인 페이지                              |
 
 <br><br>
 
@@ -54,9 +54,9 @@
 
 - React, JavaScript, TypeScript
 
-- styled-components
+- Styled-components
 
-- Axios, Context API
+- Axios, Context API, Remark-gfm, React-markdown
 
 <br><br>
 
