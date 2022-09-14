@@ -8,7 +8,7 @@ import { IIssue } from '@/types';
 import { formatDate } from '@/utils/FormatDate';
 
 const MainList: React.FC<IIssue> = (props) => {
-  const { number, title, user, created_at: createdAt, comments } = props;
+  const { number, title, user, createdAt, comments } = props;
 
   return (
     <RootWrap>

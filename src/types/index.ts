@@ -1,33 +1,33 @@
 export interface IIssue {
   url: string;
-  repository_url: string;
-  labels_url: string;
-  comments_url: string;
-  events_url: string;
-  html_url: string;
+  repositoryUrl: string;
+  labelsUrl: string;
+  commentsUrl: string;
+  eventsUrl: string;
+  htmlUrl: string;
   id: number;
-  node_id: string;
+  nodeId: string;
   number: number; // 이슈번호
   title: string; // 이슈제목
   user: {
     login: string; // 작성자
     id: number;
-    node_id: string;
-    avatar_url: string; // 작성자 프로필 이미지
-    gravatar_id: string;
+    nodeId: string;
+    avatarUrl: string; // 작성자 프로필 이미지
+    gravatarId: string;
     url: string;
-    html_url: string;
-    followers_url: string;
-    following_url: string;
-    gists_url: string;
-    starred_url: string;
-    subscriptions_url: string;
-    organizations_url: string;
-    repos_url: string;
-    events_url: string;
-    received_events_url: string;
+    htmlUrl: string;
+    followersUrl: string;
+    followingUrl: string;
+    gistsUrl: string;
+    starredUrl: string;
+    subscriptionsUrl: string;
+    organizationsUrl: string;
+    reposUrl: string;
+    eventsUrl: string;
+    receivedEventsUrl: string;
     type: string;
-    site_admin: boolean;
+    siteAdmin: boolean;
   };
   labels: [];
   state: string; // 이슈 오픈 상태
@@ -36,23 +36,23 @@ export interface IIssue {
   assignees: [];
   milestone: null | string;
   comments: 0; // 코멘트 수
-  created_at: string; // 작성일
-  updated_at: string;
-  closed_at: null | string;
-  author_association: string;
-  active_lock_reason: null | string;
+  createdAt: string; // 작성일
+  updatedAt: string;
+  closedAt: null | string;
+  authorAssociation: string;
+  activeLockReason: null | string;
   draft: boolean;
-  pull_request: {
+  pullRequest: {
     url: string;
-    html_url: string;
-    diff_url: string;
-    patch_url: string;
-    merged_at: null;
+    htmlUrl: string;
+    diffUrl: string;
+    patchUrl: string;
+    mergedAt: null;
   };
   body: string; // 본문
   reactions: {
     url: string;
-    total_count: number;
+    totalCount: number;
     '+1': number;
     '-1': number;
     laugh: number;
@@ -62,9 +62,9 @@ export interface IIssue {
     rocket: number;
     eyes: number;
   };
-  timeline_url: string;
-  performed_via_github_app: null | string;
-  state_reason: null | string;
+  timelineUrl: string;
+  performedViaGithubApp: null | string;
+  stateReason: null | string;
 }
 
 export type IssueContextType = {
