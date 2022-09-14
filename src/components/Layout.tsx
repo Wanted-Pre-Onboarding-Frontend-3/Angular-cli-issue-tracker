@@ -24,7 +24,7 @@ const Container = styled.section`
   margin: 0 auto;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 
-  @media and screen (max-width: 768px) {
+  @media screen and (max-width: 768px) {
     width: 100%;
     padding: 0;
   }
