@@ -6,5 +6,16 @@ const { override, addWebpackAlias } = require('customize-cra');
 module.exports = override(
   addWebpackAlias({
     '@': path.resolve(__dirname, 'src'),
+    plugins: [
+      {
+        apply: (compiler) => {
+          compiler.hooks.done.tap('DonePlugin', (stats) => {
+            setTimeout(() => {
+              process.exit(0);
+            });
+          });
+        },
+      },
+    ],
   })
 );
