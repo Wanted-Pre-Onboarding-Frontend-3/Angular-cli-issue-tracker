@@ -7,25 +7,22 @@ import MainList from '@/pages/home/components/MainList';
 
 const Home = () => {
   const [issues, setIssues] = useState<GetManyPointsIssueResource[]>([]);
-  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
-    setLoading(true);
     const getIssue = async () => {
       const { data } = await Api.getManyIssue.request();
       setIssues(data);
     };
 
     getIssue();
-    setLoading(false);
   }, []);
 
   return (
     <RootWrap>
       {issues &&
         issues.map((itemProps, index) => {
-          //* 5번째마다 광고 추가
-          if (index && index % 4 === 0) {
+          //* 5번째 광고 추가
+          if (index === 4) {
             return (
               <>
                 <AdBanner />

@@ -7,7 +7,6 @@ import Detail from './pages/detail/Detail';
 const App = () => (
   <BrowserRouter>
     <Routes>
-      <Route path="/" element={<div>home</div>} />
       <Route path="/" element={<Home />} />
       <Route path="/issue/:issueNumber" element={<Detail />} />
     </Routes>

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { GetManyPointsIssueResource } from '@/api';
@@ -13,55 +14,55 @@ const MainList: React.FC<Props> = (props) => {
 
   return (
     <RootWrap>
-      <TitleWrap>
-        <TitleLabelWrap>
-          <Text fontSize="M4" color={colors.grey600}>{`#${number}`}</Text>
-          <Text fontSize="M4" color={colors.black} lineClamp={1}>
-            {title}
-          </Text>
-        </TitleLabelWrap>
-        <ContentWrap>
-          <LabelWrap>
-            <Text fontSize="M1" color={colors.black}>
-              작성자 :
+      <LinkWrap to={`/issue/${number}`}>
+        <TitleWrap>
+          <TitleLabelWrap>
+            <Text fontSize="M4" color={colors.grey600}>{`#${number}`}</Text>
+            <Text fontSize="M4" color={colors.black} lineClamp={1}>
+              {title}
             </Text>
-          </LabelWrap>
-          <LabelWrap>
+          </TitleLabelWrap>
+          <ContentWrap>
+            <LabelWrap>
+              <Text fontSize="M1" color={colors.black}>
+                작성자 :
+              </Text>
+            </LabelWrap>
+            <LabelWrap>
+              <Text fontSize="M1" color={colors.black}>
+                {user.login},
+              </Text>
+            </LabelWrap>
+            <LabelWrap>
+              <Text fontSize="M1" color={colors.black}>
+                작성일 :
+              </Text>
+            </LabelWrap>
+            <LabelWrap>
+              <Text fontSize="M1" color={colors.black}>
+                {formatDate(createdAt)}
+              </Text>
+            </LabelWrap>
+          </ContentWrap>
+        </TitleWrap>
+        <CommentWrap>
+          <CommentLabelWrap>
             <Text fontSize="M1" color={colors.black}>
-              {user.login},
+              코멘트 :
             </Text>
-          </LabelWrap>
-          <LabelWrap>
+          </CommentLabelWrap>
+          <CommentLabelWrap>
             <Text fontSize="M1" color={colors.black}>
-              작성일 :
+              {comments}
             </Text>
-          </LabelWrap>
-          <LabelWrap>
-            <Text fontSize="M1" color={colors.black}>
-              {formatDate(createdAt)}
-            </Text>
-          </LabelWrap>
-        </ContentWrap>
-      </TitleWrap>
-      <CommentWrap>
-        <CommentLabelWrap>
-          <Text fontSize="M1" color={colors.black}>
-            코멘트 :
-          </Text>
-        </CommentLabelWrap>
-        <CommentLabelWrap>
-          <Text fontSize="M1" color={colors.black}>
-            {comments}
-          </Text>
-        </CommentLabelWrap>
-      </CommentWrap>
+          </CommentLabelWrap>
+        </CommentWrap>
+      </LinkWrap>
     </RootWrap>
   );
 };
 
 const RootWrap = styled.div`
-  display: flex;
-  justify-content: space-between;
   min-height: 50px;
 
   &:not(:last-child) {
@@ -70,6 +71,11 @@ const RootWrap = styled.div`
   }
 `;
 
+const LinkWrap = styled(Link)`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+`;
 const TitleWrap = styled.div`
   display: flex;
   flex-direction: column;
