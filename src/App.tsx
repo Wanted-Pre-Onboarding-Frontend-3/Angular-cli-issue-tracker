@@ -1,19 +1,23 @@
-import React from 'react';
-import { createGlobalStyle } from 'styled-components';
-import reset from 'styled-reset';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-import { Text } from '@/components/text';
-import { colors } from '@/styles/colors';
+import Detail from '@/pages/detail/Detail';
+import Home from '@/pages/home/Home';
+import { IssueProvider } from '@/store/api-context';
 
-const GlobalStyle = createGlobalStyle`
-  ${reset}
-`;
+import NotFound from './components/NotFound';
 
-const App = () => (
-  <>
-    <GlobalStyle />
-    <Text color={colors.error500}>test</Text>
-  </>
-);
+const App = () => {
+  return (
+    <IssueProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/issue/:issueNumber" element={<Detail />} />
+          <Route path="/" element={<NotFound />} />
+        </Routes>
+      </BrowserRouter>
+    </IssueProvider>
+  );
+};
 
 export default App;
