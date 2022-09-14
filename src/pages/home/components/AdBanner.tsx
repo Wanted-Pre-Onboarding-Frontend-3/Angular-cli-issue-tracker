@@ -1,13 +1,16 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { colors } from '@/styles/colors';
 
 const AdBanner = () => {
   return (
-    <ImageWrap>
-      <Image src={`${process.env.PUBLIC_URL}/thingsflow_banner.png`} alt="Ad banner" />
-    </ImageWrap>
+    <Link to="//www.thingsflow.com/ko/home" target="_blank" rel="noopener noreferrer">
+      <ImageWrap>
+        <Image src={`${process.env.PUBLIC_URL}/thingsflow_banner.png`} alt="Ad banner" />
+      </ImageWrap>
+    </Link>
   );
 };
 
