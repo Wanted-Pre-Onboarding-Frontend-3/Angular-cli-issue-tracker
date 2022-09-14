@@ -8,10 +8,10 @@ import IssueStateContext from '@/store/api-context';
 import { getNextPage } from '@/utils/GetNextPage';
 
 const Home = () => {
-  const { api, issueData, setIssueData } = useContext(IssueStateContext);
+  const { getIssueApi, issueData, setIssueData } = useContext(IssueStateContext);
   const ref = useIntersect(async (entry, observer) => {
     observer.unobserve(entry.target);
-    const nextData = await api.getIssueApi({
+    const nextData = await getIssueApi({
       params: {
         page: getNextPage(),
       },
