@@ -10,9 +10,10 @@ jobs:
     runs-on: ubuntu-latest
     env:
       REACT_APP_API_HOST: ${{ secrets.REACT_APP_API_HOST }}
+      REACT_APP_API_TOKEN: ${{ secrets.REACT_APP_API_TOKEN }}
     steps:
-      - uses: actions/checkout@master
-      - run: npm i --force
+      - uses: actions/checkout@v3
+      - run: npm ci
       - run: npm run build
       - name: deploy to s3 bucket
         uses: jakejarvis/s3-sync-action@master
