@@ -12,9 +12,9 @@ const NotFound = () => {
       <Link to="/">
         <h3>이슈 리스트로 돌아가기</h3>
       </Link>
-      <a href="https://thingsflow.com/ko/home" target="_blank" rel="noreferrer">
+      <Link to="//www.thingsflow.com/ko/home" target="_blank" rel="noopener noreferrer">
         <img src={`${process.env.PUBLIC_URL}/thingsflow_banner.png`} alt="Ad banner" />
-      </a>
+      </Link>
     </Container>
   );
 };

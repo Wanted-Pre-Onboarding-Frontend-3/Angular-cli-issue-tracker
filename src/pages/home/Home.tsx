@@ -61,11 +61,9 @@ const RootWrap = styled.div`
   margin: 1rem auto;
   display: flex;
   flex-direction: column;
-  gap: 16px;
 
   @media screen and (max-width: 768px) {
-    width: 100%;
-    max-width: 768px;
+    width: 96%;
   }
 `;
 
