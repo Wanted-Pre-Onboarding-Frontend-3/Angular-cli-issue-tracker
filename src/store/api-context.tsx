@@ -17,7 +17,6 @@ export const IssueProvider: React.FC<Props> = ({ children }) => {
     baseURL: BASE_URL,
     headers: {
       Accept: 'application/vnd.github+json',
-      Authorization: `Bearer ${process.env.REACT_APP_API_TOKEN}`,
     },
     paramsSerializer: (params) => {
       return new URLSearchParams(params).toString();
