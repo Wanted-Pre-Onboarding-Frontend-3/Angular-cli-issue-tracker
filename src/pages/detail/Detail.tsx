@@ -7,10 +7,9 @@ import styled from 'styled-components';
 import Layout from '@/components/Layout';
 import Spinner from '@/components/Spinner';
 import { Text } from '@/components/text';
+import { Flex, Span } from '@/pages/detail/components/common';
 import IssueStateContext from '@/store/api-context';
 import { colors } from '@/styles/colors';
-
-import { Flex, Span } from './components/common';
 
 const Detail = () => {
   const { isLoading, issueData } = useContext(IssueStateContext);
