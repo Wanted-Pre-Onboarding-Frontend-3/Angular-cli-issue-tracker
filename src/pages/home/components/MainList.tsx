@@ -16,7 +16,7 @@ const MainList: React.FC<IIssue> = (props) => {
         <TitleWrap>
           <TitleLabelWrap>
             <Text fontSize="M4" color={colors.grey600}>{`#${number}`}</Text>
-            <Text fontSize="M4" color={colors.black} lineClamp={1}>
+            <Text fontSize="M4" color={colors.black} fontWeight="bold" lineClamp={1}>
               {title}
             </Text>
           </TitleLabelWrap>
@@ -28,7 +28,7 @@ const MainList: React.FC<IIssue> = (props) => {
             </LabelWrap>
             <LabelWrap>
               <Text fontSize="M1" color={colors.black}>
-                {user.login},
+                {user.login} |
               </Text>
             </LabelWrap>
             <LabelWrap>
@@ -44,16 +44,12 @@ const MainList: React.FC<IIssue> = (props) => {
           </ContentWrap>
         </TitleWrap>
         <CommentWrap>
-          <CommentLabelWrap>
-            <Text fontSize="M1" color={colors.black}>
-              코멘트 :
-            </Text>
-          </CommentLabelWrap>
-          <CommentLabelWrap>
-            <Text fontSize="M1" color={colors.black}>
-              {comments}
-            </Text>
-          </CommentLabelWrap>
+          <Text fontSize="M2" color={colors.black}>
+            코멘트
+          </Text>
+          <Text fontSize="M1" color={colors.black} fontWeight="bold">
+            {comments}
+          </Text>
         </CommentWrap>
       </LinkWrap>
     </RootWrap>
@@ -62,10 +58,13 @@ const MainList: React.FC<IIssue> = (props) => {
 
 const RootWrap = styled.div`
   min-height: 50px;
+  padding: 16px 10px;
 
   &:not(:last-child) {
-    padding-bottom: 8px;
     border-bottom: 1px solid ${colors.grey600};
+  }
+  &:hover {
+    background-color: ${colors.grey200};
   }
 `;
 
@@ -90,24 +89,20 @@ const TitleLabelWrap = styled.div`
 const ContentWrap = styled.div`
   display: flex;
   flex-basis: 15%;
+
+  &:ntn-child(2) {
+    padding-right: 14px;
+  }
 `;
 
 const LabelWrap = styled.div`
   &:not(:last-child) {
-    margin-right: 4px;
+    margin-right: 8px;
   }
 `;
 
 const CommentWrap = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-`;
-
-const CommentLabelWrap = styled.div`
-  &:not(:last-child) {
-    margin-right: 4px;
-  }
+  text-align: center;
 `;
 
 export default MainList;

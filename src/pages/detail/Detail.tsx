@@ -73,7 +73,6 @@ const IssueInfo = styled(Flex)`
   background-color: ${colors.grey200};
   border-radius: 20px 20px 0 0;
 
-  flex-basis: 200px;
   @media (max-width: 768px) {
     flex-direction: column;
   }
